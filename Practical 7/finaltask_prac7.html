@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { 
+    text-align:center; 
+    font-family:sans-serif; 
+}
+#show { 
+    font-size:80px; 
+    margin-top:20px; 
+}
+</style>
+</head>
+<body id="main">
+<h3>Weather Mood</h3>
+<select id="mood">
+    <option value="">select</option>
+    <option value="sunny">sunny</option>
+    <option value="rainy">rainy</option>
+    <option value="cold">cold</option>
+</select>
+<p id="show"></p>
+<script>
+    const mood = document.querySelector("#mood");
+    const show = document.querySelector("#show");
+    const main = document.querySelector("#main");
+    mood.addEventListener("change", changeMood);
+    function changeMood(){
+    let m = mood.value;
+    if(m === "sunny"){
+        main.style.backgroundColor = "lightyellow";
+        show.innerHTML = "☀";
+    }
+    else if(m === "rainy"){
+        main.style.backgroundColor = "lightgrey";
+        show.innerHTML = "🌧";
+    }
+    else if(m === "cold"){
+        main.style.backgroundColor = "lightcyan";
+        show.innerHTML = "❄";
+    }
+    else {
+        main.style.backgroundColor = "white";
+        show.innerHTML = "";
+    }
+}
+</script>
+</body>
+</html>

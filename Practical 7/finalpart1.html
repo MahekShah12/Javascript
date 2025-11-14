@@ -1,0 +1,103 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Mood App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      transition: background 0.5s ease;
+    }
+    select { padding: 10px; font-size: 16px; }
+    .mood-display {
+      font-size: 48px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h2>🌈 Weather Mood App</h2>
+  <label for="mood">Choose mood:</label>
+  <select id="mood">
+    <option value="">--Select--</option>
+    <option value="sunny">☀ Sunny</option>
+    <option value="rainy">🌧 Rainy</option>
+    <option value="cold">❄ Cold</option>
+  </select>
+
+  <div class="mood-display" id="moodDisplay"></div>
+
+  <script>
+    const moodSelect = document.getElementById("mood");
+    const moodDisplay = document.getElementById("moodDisplay");
+
+    moodSelect.addEventListener("change", () => {
+      const mood = moodSelect.value;
+      if (mood === "sunny") {
+        document.body.style.background = "lightyellow";
+        moodDisplay.textContent = "☀";
+      } else if (mood === "rainy") {
+        document.body.style.background = "lightblue";
+        moodDisplay.textContent = "🌧";
+      } else if (mood === "cold") {
+        document.body.style.background = "lightcyan";
+        moodDisplay.textContent = "❄";
+      } else {
+        document.body.style.background = "white";
+        moodDisplay.textContent = "";
+      }
+    });
+  </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { text-align:center; font-family:sans-serif; }
+  #show { font-size:80px; margin-top:20px; }
+</style>
+</head>
+<body id="main">
+
+<h3>Weather Mood</h3>
+
+<select id="mood" onchange="changeMood()">
+  <option value="">--select--</option>
+  <option value="sunny">sunny</option>
+  <option value="rainy">rainy</option>
+  <option value="cold">cold</option>
+</select>
+
+<p id="show"></p>
+
+<script>
+function changeMood(){
+  let m = document.getElementById("mood").value;
+  let s = document.getElementById("show");
+  let b = document.getElementById("main");
+
+  if(m=="sunny"){
+    b.style.backgroundColor="yellow";
+    s.innerHTML="☀";
+  }
+  else if(m=="rainy"){
+    b.style.backgroundColor="lightblue";
+    s.innerHTML="🌧";
+  }
+  else if(m=="cold"){
+    b.style.backgroundColor="lightcyan";
+    s.innerHTML="❄";
+  }
+  else{
+    b.style.backgroundColor="white";
+    s.innerHTML="";
+  }
+}
+</script>
+
+</body>
+</html>

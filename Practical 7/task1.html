@@ -1,0 +1,15 @@
+<input type="text" id="taskInput" placeholder="Enter a task">
+<button onclick="addTask()">Add Task</button>
+<ul id="taskList"></ul>
+<script>
+function addTask() {
+    const taskInput=document.getElementById("taskInput");
+    const taskText=taskInput.value.trim();
+    if (taskText!=="") {
+        const li=document.createElement("li");
+        li.textContent=taskText;
+        document.getElementById("taskList").appendChild(li);
+        taskInput.value="";
+    }
+}
+</script>
