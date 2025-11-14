@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FitZone Gym Admission Form</title>
+<style>
+  body { font-family: Arial, sans-serif; background:#f8f8f8; display:flex; justify-content:center; padding:20px; }
+  form { background:#fff; border:2px solid #ccc; padding:20px; width:400px; border-radius:6px; }
+  h2 { text-align:center; margin-bottom:10px; }
+  label { font-weight:bold; display:block; margin-top:10px; }
+  input, select { width:100%; padding:6px; border:1px solid #aaa; border-radius:4px; transition:border 0.3s; }
+  input.valid, select.valid { border-color:green; }
+  input.invalid, select.invalid { border-color:red; }
+  p { font-size:12px; color:red; margin:2px 0; }
+  p.success { color:green; }
+  .row { display:flex; gap:10px; margin-top:5px; }
+  button { width:48%; padding:6px 0; border:none; border-radius:4px; color:#fff; cursor:pointer; }
+  #submitBtn { background:#28a745; } 
+  #resetBtn { background:#dc3545; }
+  #preview { margin-top:10px; padding:10px; border:1px solid #ccc; display:none; background:#f0f0f0; border-radius:4px; }
+</style>
+</head>
+<body>
+<form id="gymForm" name="gymForm" method="post" action="#">
+<h2>FitZone Gym Admission Form</h2>
+<label>Full Name:</label>
+<input type="text" id="fullName">
+<p id="nameMsg"></p>
+<label>Email:</label>
+<input type="email" id="email">
+<p id="emailMsg"></p>
+<label>Age:</label>
+<input type="number" id="age" placeholder="18-60">
+<p id="ageMsg"></p>
+<label>Gender:</label>
+<div class="row">
+  <label><input type="radio" name="gender" value="Male"> Male</label>
+  <label><input type="radio" name="gender" value="Female"> Female</label>
+  <label><input type="radio" name="gender" value="Other"> Other</label>
+</div>
+<p id="genderMsg"></p>
+<label>Membership Type:</label>
+<select id="membership">
+  <option value="">Select</option>
+  <option>Monthly</option>
+  <option>Quarterly</option>
+  <option>Yearly</option>
+</select>
+<p id="memberMsg"></p>
+<label>Password:</label>
+<input type="password" id="password">
+<p id="passMsg"></p>
+<label>Confirm Password:</label>
+<input type="password" id="confirm">
+<p id="confirmMsg"></p>
+<label>Phone:</label>
+<input type="text" id="phone" maxlength="10">
+<p id="phoneMsg"></p>
+<label>Date of Birth:</label>
+<input type="date" id="dob">
+<p id="dobMsg"></p>
+<label>Profile Photo:</label>
+<input type="file" id="photo" accept=".jpg,.png">
+<p id="photoMsg"></p>
+<div>
+  <input type="checkbox" id="terms"> I agree to Terms & Conditions
+</div>
+<p id="termsMsg"></p>
+<div class="row">
+  <button type="submit" id="submitBtn" disabled>Submit</button>
+  <button type="reset" id="resetBtn">Reset</button>
+</div>
+<div id="preview"></div>
+</form>
+<script>
+const form = document.forms["gymForm"];
+const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+const passPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%^&+=]).{8,}$/;
+function show(id,msg,ok=false){ 
+  const el=document.getElementById(id); 
+  el.textContent=msg; 
+  el.className=ok?"success":""; 
+}
+function updatePreview(){
+  const preview=document.getElementById("preview");
+  preview.style.display="block";
+  preview.innerHTML=`<h3>Preview:</h3>
+  <p><b>Name:</b> ${form.fullName.value || "-"}<br>${document.getElementById("nameMsg").textContent}</p>
+  <p><b>Email:</b> ${form.email.value || "-"}<br>${document.getElementById("emailMsg").textContent}</p>
+  <p><b>Age:</b> ${form.age.value || "-"}<br>${document.getElementById("ageMsg").textContent}</p>
+  <p><b>Gender:</b> ${document.querySelector('input[name="gender"]:checked')?.value || "-"}<br>${document.getElementById("genderMsg").textContent}</p>
+  <p><b>Membership:</b> ${form.membership.value || "-"}<br>${document.getElementById("memberMsg").textContent}</p>
+  <p><b>Password:</b> ${form.password.value?"********":"-"}<br>${document.getElementById("passMsg").textContent}</p>
+  <p><b>Confirm:</b> ${form.confirm.value?"********":"-"}<br>${document.getElementById("confirmMsg").textContent}</p>
+  <p><b>Phone:</b> ${form.phone.value || "-"}<br>${document.getElementById("phoneMsg").textContent}</p>
+  <p><b>DOB:</b> ${form.dob.value || "-"}<br>${document.getElementById("dobMsg").textContent}</p>
+  <p><b>Photo:</b> ${form.photo.files[0]?.name || "-"}<br>${document.getElementById("photoMsg").textContent}</p>
+  <p><b>Terms:</b> ${form.terms.checked?"Accepted":"Not Accepted"}<br>${document.getElementById("termsMsg").textContent}</p>`;
+}
+function toggleSubmit(){
+  const validFields=document.querySelectorAll("input.valid,select.valid").length;
+  const gender=document.querySelector('input[name="gender"]:checked');
+  document.getElementById("submitBtn").disabled=!(validFields>=9 && gender && form.terms.checked);
+}
+// Validations
+form.fullName.oninput=function(){
+  if(this.value.trim().length>=3){
+    this.className="valid"; show("nameMsg","✅ Looks good",true);
+  } else if(this.value.trim()!==""){
+    this.className="invalid"; show("nameMsg","❌ Name too short");
+  } else {this.className=""; show("nameMsg","❌ Missing");}
+  updatePreview(); toggleSubmit();
+};
+form.email.oninput=function(){
+  if(emailPattern.test(this.value)){this.className="valid"; show("emailMsg","✅ Valid",true);}
+  else if(this.value){this.className="invalid"; show("emailMsg","❌ Invalid email");}
+  else {this.className=""; show("emailMsg","❌ Missing");}
+  updatePreview(); toggleSubmit();
+};
+form.age.oninput=function(){
+  const a=Number(this.value);
+  if(a>=18&&a<=60){this.className="valid"; show("ageMsg","✅ OK",true);}
+  else if(this.value){this.className="invalid"; show("ageMsg","❌ 18–60 only");}
+  else {this.className=""; show("ageMsg","❌ Missing");}
+  updatePreview(); toggleSubmit();
+};
+document.querySelectorAll('input[name="gender"]').forEach(r=>{
+  r.onchange=()=>{show("genderMsg","✅ Selected",true);updatePreview();toggleSubmit();}
+});
+form.membership.onchange=function(){
+  if(this.value){this.className="valid"; show("memberMsg","✅ Selected",true);}
+  else {this.className="invalid"; show("memberMsg","❌ Missing");}
+  updatePreview(); toggleSubmit();
+};
+form.password.oninput=function(){
+  if(passPattern.test(this.value)){this.className="valid"; show("passMsg","✅ Strong",true);}
+  else if(this.value){this.className="invalid"; show("passMsg","❌ Weak password");}
+  else {this.className=""; show("passMsg","❌ Missing");}
+  form.confirm.oninput(); updatePreview(); toggleSubmit();
+};
+form.confirm.oninput=function(){
+  if(this.value===form.password.value && this.value){this.className="valid"; show("confirmMsg","✅ Match",true);}
+  else if(this.value){this.className="invalid"; show("confirmMsg","❌ Not match");}
+  else {this.className=""; show("confirmMsg","❌ Missing");}
+  updatePreview(); toggleSubmit();
+};
+form.phone.oninput=function(){
+  if(/^[0-9]{10}$/.test(this.value)){this.className="valid"; show("phoneMsg","✅ OK",true);}
+  else if(this.value){this.className="invalid"; show("phoneMsg","❌ 10 digits");}
+  else {this.className=""; show("phoneMsg","❌ Missing");}
+  updatePreview(); toggleSubmit();
+};
+form.dob.onchange=function(){
+  if(!this.value){this.className="invalid"; show("dobMsg","❌ Missing");}
+  else if(new Date(this.value)<new Date()){this.className="valid"; show("dobMsg","✅ OK",true);}
+  else {this.className="invalid"; show("dobMsg","❌ Future date");}
+  updatePreview(); toggleSubmit();
+};
+form.photo.onchange=function(){
+  const f=this.files[0];
+  if(!f){this.className="invalid"; show("photoMsg","❌ Missing");updatePreview();return;}
+  const ext=f.name.split('.').pop().toLowerCase();
+  if((ext==="jpg"||ext==="png")&&f.size<=1024*1024){this.className="valid"; show("photoMsg","✅ OK",true);}
+  else if(f.size>1024*1024){this.className="invalid"; show("photoMsg","❌ >1MB");}
+  else {this.className="invalid"; show("photoMsg","❌ JPG/PNG only");}
+  updatePreview(); toggleSubmit();
+};
+form.terms.onchange=function(){
+  if(this.checked){show("termsMsg","✅ Accepted",true);}
+  else {show("termsMsg","❌ Must accept");}
+  updatePreview(); toggleSubmit();
+};
+// Submit
+form.onsubmit=function(e){
+  e.preventDefault();
+  alert("✅ Form Submitted Successfully!");
+  updatePreview();
+};
+// Reset
+form.onreset=function(){
+  document.querySelectorAll("p").forEach(p=>p.textContent="");
+  document.querySelectorAll("input,select").forEach(el=>el.className="");
+  document.getElementById("preview").style.display="none";
+  document.getElementById("preview").innerHTML="";
+  document.getElementById("submitBtn").disabled=true;
+};
+</script>
+</body>
+</html>
