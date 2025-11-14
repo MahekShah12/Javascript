@@ -1,0 +1,11 @@
+<script>
+const generateGreeting = (name="Guest",role="Employee", location="Unknown") => {
+  return `Hello ${name}! Your role is ${role} and you are currently in ${location}.`;
+};
+console.log(generateGreeting("Mahek","Intern","Nagpur"));     
+console.log(generateGreeting("Mahek"));                 
+console.log(generateGreeting("Mahek","Student"));
+console.log(generateGreeting("Student"));
+console.log(generateGreeting("Mahek","Nagpur"));
+console.log(generateGreeting());                                  
+</script>

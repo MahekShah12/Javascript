@@ -1,0 +1,13 @@
+<script>
+const student = { name:"Riya", roll_number:101, Math:85, Science:90, English:78, History:88, Art:92}
+const {name,roll_number,Math,Science,English,History,Art} = student
+const total = Math+Science+English+ History +Art
+const percentage = (total/500)*100;
+const Card = `Report Card for ${name} (Roll No: ${roll_number})
+-----------------------------------
+Subjects: Math: ${Math}, Science: ${Science}, English: ${English}, History: ${History},Art: ${Art}
+Total Marks: ${total}
+Percentage: ${percentage}%
+`;
+console.log(Card);
+</script>
