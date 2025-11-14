@@ -1,0 +1,43 @@
+<!-- <script>
+    let students = [
+    { id: 1, name: "Mahek", marks:90},
+    { id: 4, name: "Riya", marks:45},
+    { id: 5, name: "Sonal", marks:55}
+    ];
+    let names = students.map(item => item.name);
+    console.log("Student Names:", names  );
+    let toppers = students.filter(item => item.marks > 50);
+    console.log("Toppers:", toppers);
+    let average = students.reduce((sum, item) => sum + item.marks, 0) / students.length;
+    console.log("Average Marks:", average);
+    console.log("Report Card:");
+    students.forEach(item => {
+    console.log(`${item.id} ${item.name} - ${item.marks}`);
+    });
+</script> -->
+
+<script>
+let numbers = [21, 19, 16, 18, 20];
+console.log("Original Array:", numbers);
+
+// Add element 22 to the end
+numbers.push(22);
+console.log("After push(22):", numbers);
+
+// Remove the last element
+numbers.pop();
+console.log("After pop():", numbers);
+
+// Print array length
+console.log("Array length:", numbers.length);
+
+// Square each element
+let squares = numbers.map(num => num * num);
+console.log("Squares:", squares);
+
+// Cube each element (you labeled as "Triples" but it's cube)
+let triple = numbers.map(num => num * num * num);
+console.log("Triples:", triple);
+</script>
+
+

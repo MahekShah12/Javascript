@@ -1,0 +1,110 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Cart Calculator</title>
+</head>
+<body>
+<script>
+let cart = [
+{ id: 1, name: "Pen", price: 20, qty: 2, category: "stationery" },
+{ id: 2, name: "Mug", price: 150, qty: 1, category: "kitchen" },
+{ id: 3, name: "Notebook", price: 80, qty: 3, category: "stationery" }
+];
+let itemTotals = cart.map(item => item.price * item.qty);
+let discountedItemTotals = cart.map(item => {
+    let subtotal = item.price * item.qty;
+    if (item.qty >= 3) {
+        subtotal = subtotal - (subtotal * 0.05);
+    }
+    return subtotal;
+});
+let stationeryItems = cart.filter(item => item.category === "stationery");
+let stationeryTotal = stationeryItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+let stationeryDiscount = (stationeryTotal > 200) ? stationeryTotal * 0.10 : 0;
+let subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+let discountedTotal = discountedItemTotals.reduce((sum, val) => sum + val, 0);
+let itemDiscounts = subtotal - discountedTotal;
+let finalTotal = subtotal - itemDiscounts - stationeryDiscount;
+document.write("<h2>Receipt</h2>");
+cart.forEach(item => {
+    let subtotal = item.price * item.qty;
+    let line = `Item: ${item.name} (x${item.qty}) = ${subtotal}`;
+    if (item.qty >= 3) {
+        line += " → discount applied";
+    }
+    document.write(line + "<br>");
+});
+document.write("---------------------------------<br>");
+document.write("Subtotal: " + subtotal.toFixed(2) + "<br>");
+document.write("Item Discounts: " + itemDiscounts.toFixed(2) + "<br>");
+document.write("Stationery Discount: " + stationeryDiscount.toFixed(2) + "<br>");
+document.write("Final Total: " + finalTotal.toFixed(2) + "<br>");
+</script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cart Calculator (Receipt)</title>
+</head>
+<body>
+  <!-- receipt will appear here -->
+  <pre id="receipt"></pre>
+
+  <script>
+  // Helper to format numbers like the worksheet
+  function formatValue(val) {
+    return Number(val.toFixed(2)); // 430.00 -> 430, 26.80 -> 26.8
+  }
+
+  // Part A – Setup the Cart
+  const cart = [
+    { id: 1, name: "Pen", price: 20, qty: 2, category: "stationery" },
+    { id: 2, name: "Mug", price: 150, qty: 1, category: "kitchen" },
+    { id: 3, name: "Notebook", price: 80, qty: 3, category: "stationery" }
+  ];
+
+  // Part C – Item-Level Discount (5% if qty ≥ 3)
+  const discountedItemTotals = cart.map(item => {
+    let subtotal = item.price * item.qty;
+    if (item.qty >= 3) subtotal -= subtotal * 0.05;
+    return subtotal;
+  });
+
+  // Part D – Category-Level Discount after item-level discounts
+  const stationeryItems = cart.filter(item => item.category === "stationery");
+  const stationeryDiscountedTotal = stationeryItems.reduce((sum, item) => {
+    let subtotal = item.price * item.qty;
+    if (item.qty >= 3) subtotal -= subtotal * 0.05;
+    return sum + subtotal;
+  }, 0);
+  const stationeryDiscount = (stationeryDiscountedTotal > 200) ? stationeryDiscountedTotal * 0.10 : 0;
+
+  // Part E – Totals
+  const subtotal = cart.reduce((s, item) => s + (item.price * item.qty), 0);
+  const discountedTotal = discountedItemTotals.reduce((s, v) => s + v, 0);
+  const itemDiscounts = subtotal - discountedTotal;
+  const finalTotal = subtotal - itemDiscounts - stationeryDiscount;
+
+  // Build receipt lines (preserves formatting)
+  const lines = [];
+  cart.forEach(item => {
+    let itemSub = item.price * item.qty;
+    let line = `Item: ${item.name} (x${item.qty}) = ${itemSub}`;
+    if (item.qty >= 3) line += " → discount applied";
+    lines.push(line);
+  });
+
+  lines.push("---------------------------------", "");
+  lines.push("Subtotal: " + formatValue(subtotal));
+  lines.push("Item Discounts: " + formatValue(itemDiscounts));
+  lines.push("Stationery Discount: " + formatValue(stationeryDiscount));
+  lines.push("Final Total: " + formatValue(finalTotal));
+
+  // Output to the <pre> (avoids stray HTML tokens being printed)
+  document.getElementById('receipt').innerText = lines.join("\n");
+  </script>
+</body>
+</html>
