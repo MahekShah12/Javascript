@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let health= prompt("Enter health score: ")
+        let rep=prompt("Enter reputation score: ")
+        let invent=prompt("Enter inventory item: ")
+        let healed=prompt("enter the the healing score: ")
+        let prev_attacked=prompt("were you previously attcked? (yes/no): ")
+        let reaction=""
+        if(health>=90 && rep<=25){ //heath high, rep low
+            reaction="handle it yourself"
+        }else if(health<=50 && rep>25){ //rep high,health low
+            reaction="I'll heal you"
+        }else if (rep==-45 && invent=="sword"){
+            reaction="I'll help you"
+        }else if(rep>=40 && (invent=="sword" || invent=="magic ring")){
+            reaction="I'm with you"
+        }
+        else if( (healed>5 && healed<90) && prev_attacked=="yes"){
+            reaction="You are doing fine"
+        }else{
+            reaction="NO help for you"
+        }
+        console.log(reaction)
+    </script>
+</body>
+</html>

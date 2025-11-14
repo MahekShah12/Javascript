@@ -1,0 +1,28 @@
+<script>
+let user = prompt("Enter transaction type:");
+let balance = 100000;
+
+switch (user) {
+    case "withdraw":
+        let amt = parseInt(prompt("Enter amount:"));
+        if (amt < balance) {
+            console.log("New balance: " + (balance - amt));
+        } else {
+            console.log("Insufficient funds");
+        }
+        break;
+
+    case "deposit":
+        let amt1 = parseInt(prompt("Enter amount:"));
+        console.log("New balance: " + (balance + amt1));
+        break;
+
+    case "balance":
+        console.log("Balance: " + balance);
+        break;
+
+    default:
+        console.log("Invalid Transaction Type");
+}
+</script>
+

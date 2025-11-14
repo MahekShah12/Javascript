@@ -1,0 +1,23 @@
+<script>
+function emotionDetector(score,keyword="") {
+  keyword = keyword.toLowerCase();
+  if (score<-10) score=-10;
+  if (score>10) score=10;
+  let response ="";
+  if (score===6 && keyword==="tired") {
+    response="You are not clearly happy or sad";
+  } else if (score===-3 && keyword==="confused") {
+    response="It’s okay to be confused. I'll help you out";
+  } else if(score===0 && keyword==="") {
+    response="I'm not sure how you're feeling.";
+  } else {
+    response="Thanks for sharing. Tell me more so I can understand better.";
+  }
+  return response;
+}
+console.log(emotionDetector(6,"tired"));     
+console.log(emotionDetector(-3,"confused"));
+console.log(emotionDetector(0));             
+console.log(emotionDetector(9,"excited"));   
+console.log(emotionDetector(7,"happy"));
+</script>
