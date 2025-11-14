@@ -1,0 +1,33 @@
+body {
+  font-family: 'Arial', sans-serif;
+}
+p {
+  font-size: 16px;
+}
+img {
+  display: block;
+  width: 250px;
+  height: auto;
+  border: 4px solid black;
+  border-radius: 8px;
+}
+.highlight {
+  background-color: antiquewhite;
+  padding: 10px;
+}
+#special-text {
+  color: darkred;
+  font-weight: bold;
+  font-size: 18px;
+}
+.my-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+.my-button:hover {
+  background-color: #45a049;
+}
