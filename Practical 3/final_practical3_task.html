@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Grading Dashboard</title>
+  <link rel="stylesheet" href="final_practical3_task.css">
+</head>
+<body>
+<div class="container">
+<h2>Student Grading Dashboard</h2>
+<div class="student-card" id="student1">
+  <label>Name: <input type="text" id="name1" placeholder="Enter your name"></label><br><br>
+  <label>Roll No: <input type="number" id="roll1" min=1 placeholder="Enter your roll no"></label><br><br>
+  <label>English:</label>
+  <input type="range" id="e1" min="0" max="100" oninput="updateValue('e1','oe1')">
+  <output id="oe1"></output><br><br>
+  <label>Math:</label>
+  <input type="number" id="m1" min="0" max="100"><br><br>
+  <label>Subject:</label>
+  <select id="sub1"></select>
+  <label>Marks: <input type="number" id="s1" min="0" max="100"></label>
+  <div class="results"></div>
+</div>
+<div class="student-card" id="student2">
+  <label>Name: <input type="text" id="name2" placeholder="Enter your name"></label><br><br>
+  <label>Roll No: <input type="number" id="roll2" min=1 placeholder="Enter your roll no"></label><br><br>
+  <label>English:</label>
+  <input type="range" id="e2" min="0" max="100" oninput="updateValue('e2','oe2')">
+  <output id="oe2"></output><br><br>
+  <label>Math:</label>
+  <input type="number" id="m2" min="0" max="100"><br><br>
+  <label>Subject:</label>
+  <select id="sub2"></select>
+  <label>Marks: <input type="number" id="s2" min="0" max="100"></label>
+  <div class="results"></div>
+</div>
+<div class="student-card" id="student3">
+  <label>Name: <input type="text" id="name3" placeholder="Enter your name"></label><br><br>
+  <label>Roll No: <input type="number" id="roll3" min=1 placeholder="Enter your roll no"></label><br><br>
+  <label>English:</label>
+  <input type="range" id="e3" min="0" max="100" oninput="updateValue('e3','oe3')">
+  <output id="oe3"></output><br><br>
+  <label>Math:</label>
+  <input type="number" id="m3" min="0" max="100"><br><br>
+  <label>Subject:</label>
+  <select id="sub3"></select>
+  <label>Marks: <input type="number" id="s3" min="0" max="100"></label>
+  <div class="results"></div>
+</div>
+<button onclick="calculateGrades()">Submit Grades</button>
+<footer>
+  Mahek Shah | Completed on: <span id="timestamp"></span>
+</footer>
+</div>
+<script>
+  const subjects = ["Science", "History", "Geography"];
+  window.onload = function () {
+    for (let i = 1; i <= 3; i++) {
+      let select = document.getElementById("sub" + i);
+      subjects.forEach(sub => {
+        let option = document.createElement("option");
+        option.value = option.text = sub;
+        select.add(option);
+      });
+    }
+  };
+  function updateValue(sliderId, outputId) {
+    document.getElementById(outputId).value = document.getElementById(sliderId).value;
+  }
+  function calculateGrades() {
+    let topMarks = -1;
+    let topperIndex = -1;
+
+    for (let i = 1; i <= 3; i++) {
+      let card = document.getElementById("student" + i);
+      card.classList.remove("highlight", "animated");
+      let name = document.getElementById("name" + i).value.trim();
+      let roll = document.getElementById("roll" + i).value.trim();
+      let eng = parseInt(document.getElementById("e" + i).value);
+      let math = parseInt(document.getElementById("m" + i).value);
+      let sci = parseInt(document.getElementById("s" + i).value);
+      let subj = document.getElementById("sub" + i).value;
+      if (!name || !roll || isNaN(eng) || isNaN(math) || isNaN(sci) || !subj) {
+        alert("Please fill in all fields for Student " + i);
+        return;
+      }
+      let avg = Math.round((eng + math + sci) / 3);
+      let grade;
+      let remark;
+      if (avg >= 90) {
+        grade = "A";
+      remark = "Excellent";
+    } else if (avg >= 75) {
+      grade = "B";
+      remark = "Good";
+    } else if (avg >= 50) {
+      grade = "C";
+      remark = "Average";
+    } else {
+      grade = "F";
+      remark = "Fail";
+    }
+      let resultDiv = card.querySelector(".results");
+      resultDiv.innerHTML = `Average: ${avg}, Grade: ${grade}, Remark: ${remark}`;
+      if (avg > topMarks) {
+        topMarks = avg;
+        topperIndex = i;
+      }
+    }
+    if (topperIndex !== -1) {
+      let topCard = document.getElementById("student" + topperIndex);
+      topCard.classList.add("highlight", "animated");
+    }
+    document.getElementById("timestamp").textContent = new Date().toLocaleString();
+  }
+</script>
+</body>
+</html>
