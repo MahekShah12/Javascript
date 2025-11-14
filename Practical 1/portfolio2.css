@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: aliceblue;
+  color: black;
+}
+nav {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+nav a {
+  color: white;
+  margin-left: 20px;
+  font-weight: bold;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+.hero {
+  background-color: steelblue;
+  color: white;
+  padding: 40px;
+  max-width: 1000px;
+  margin: 30px auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  position: relative;
+}
+.hero img {
+  width: 180px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 20px 30px 20px 30px;
+  border: 2px solid white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.right {
+  max-width: 500px;
+  text-align: left;
+}
+.right p {
+  margin-top: 15px;
+  line-height: 1.6;
+}
+.social-links {
+  margin-top: 15px;
+}
+.social-links a {
+  display: inline-block;
+  margin-right: 15px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 6px 14px;
+  border-radius: 5px;
+}
+.social-links a:hover {
+  background-color: white;
+  color: steelblue;
+}
+
+section {
+  max-width: 900px;
+  margin: 40px auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+h2 {
+  color: #2f4f4f;
+  border-bottom: 2px solid lightgray;
+  padding-bottom: 5px;
+  margin-top: 0;
+}
+ul.skills-list li,
+ul.education-list li,
+ul.achievements-list li {
+  background-color: whitesmoke;
+  margin: 8px 0;
+  padding: 10px;
+  border-left: 6px solid steelblue;
+  border-radius: 5px;
+}
+table {
+  width: 100%;
+  border:1px solid black;
+  margin-top: 15px;
+}
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+}
+form input,
+form textarea,
+form button {
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid black;
+  width: 100%; 
+  box-sizing: border-box; 
+}
+form button {
+  width: auto;
+  background-color: steelblue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+form button:hover {
+  background-color: darkblue;
+}
+footer {
+  background-color: whitesmoke;
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
