@@ -1,0 +1,59 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<title>Session Form Saver</title> 
+<style> 
+body { 
+font-family: Arial; 
+text-align: center; 
+margin-top: 50px; 
+} 
+input, textarea { 
+display: block; 
+margin: 10px auto; 
+padding: 8px; 
+width: 300px; 
+font-size: 16px; 
+} 
+button { 
+padding: 10px 20px; 
+cursor: pointer; 
+} 
+</style> 
+</head> 
+<body> 
+<h2>Contact Form (Session Storage)</h2> 
+<form> 
+<input type="text" id="name" placeholder="Enter your name"> 
+<input type="email" id="email" placeholder="Enter your email"> 
+<textarea id="message" placeholder="Enter your message"></textarea> 
+<button type="button" onclick="clearForm()">Clear Form</button> 
+</form> 
+<script> 
+window.addEventListener("load", () => { 
+document.getElementById("name").value = sessionStorage.getItem("name") 
+|| ""; 
+document.getElementById("email").value = sessionStorage.getItem("email") 
+|| ""; 
+document.getElementById("message").value = 
+sessionStorage.getItem("message") || ""; 
+}); 
+document.getElementById("name").addEventListener("input", (e) => { 
+sessionStorage.setItem("name", e.target.value); 
+}); 
+document.getElementById("email").addEventListener("input", (e) => { 
+sessionStorage.setItem("email", e.target.value); 
+}); 
+document.getElementById("message").addEventListener("input", (e) => { 
+sessionStorage.setItem("message", e.target.value); 
+}); 
+function clearForm() { 
+document.getElementById("name").value = ""; 
+document.getElementById("email").value = ""; 
+document.getElementById("message").value = ""; 
+sessionStorage.clear(); 
+} 
+</script> 
+</body> 
+</html>
