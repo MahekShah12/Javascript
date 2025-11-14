@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+      text-align: center;
+      font-family: sans-serif;
+    }
+    #show {
+      font-size: 80px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body id="main">
+  <h3>Weather Mood</h3>
+  <select id="mood">
+    <option value="" disabled selected>--select--</option>
+    <option value="sunny">Sunny</option>
+    <option value="rainy">Rainy</option>
+    <option value="cold">Cold</option>
+  </select>
+  
+  <p id="show"></p>
+
+  <script>
+    const m = document.getElementById("mood");
+    const s = document.getElementById("show");
+    const b = document.getElementById("main");
+
+    function changeMood() {
+      const m = m.value;
+
+      if (m === "sunny") {
+        bodyElement.style.backgroundColor = "yellow";
+        showElement.textContent = "☀";
+      } else if (m === "rainy") {
+        bodyElement.style.backgroundColor = "lightblue";
+        showElement.textContent = "🌧";
+      } else if (m === "cold") {
+        bodyElement.style.backgroundColor = "lightcyan";
+        showElement.textContent = "❄";
+      } else {
+        bodyElement.style.backgroundColor = "white";
+        showElement.textContent = "";
+      }
+    }
+
+    // Attach the function using event listener
+    moodSelect.addEventListener("change", changeMood);
+  </script>
+</body>
+</html>
