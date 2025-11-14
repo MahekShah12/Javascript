@@ -1,0 +1,66 @@
+<!-- <script>
+    let str = prompt("Enter string:");
+    document.write("Input: "+str+"<br>");
+    document.write("^Mahek: "+/^Mahek/.test(str)+"<br>");
+    document.write("Shah$: "+/Shah$/.test(str)+"<br>");
+    document.write("Ma.hek: "+/Ma.hek/.test(str)+"<br>");
+    document.write("Sha+h: "+/Sha+h/.test(str)+"<br>");
+    document.write("Mahe?k: "+/Mahe?k/.test(str)+"<br>");
+    document.write("Sh[ae]h: "+/Sh[ae]h/.test(str)+"<br>");
+    document.write("[^0-9]: "+/[^0-9]/.test(str)+"<br>");
+    document.write("\\d{3}: "+/\d{3}/.test(str)+"<br>");
+    document.write("\\d (digit): "+/\d/.test(str)+"<br>");
+    document.write("\\w (word char): "+/\w/.test(str)+"<br>");
+    document.write("\\s (whitespace): "+/\s/.test(str)+"<br>");
+    document.write("Mahek|Shah: "+/(Mahek|Shah)/.test(str)+"<br>");
+</script> -->
+
+<!-- <script>
+    let num = prompt("Enter Mobile Number:");
+    let regex = /^[6-9]\d{9}$/;
+    document.write("Mobile: " + num + " → " + regex.test(num)+"<br>");
+  </script> -->
+
+
+<!-- <script>
+    let text="Today's date is 12/09/2025 and tomorrow will be 13/09/2025.";
+    let regex=/\d{2}\/\d{2}\/\d{4}/g;
+    document.write("Dates: " + text.match(regex) + "<br>");
+</script> -->
+
+
+<script>
+  let password = prompt("Enter Password:");
+  let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  if (passwordRegex.test(password)) {
+    document.write("Password: " + password + " → Strong<br><br>");
+  } else {
+    document.write("Password: " + password + " → Weak<br><br>");
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <script>
+    let dupText = prompt("Enter:");
+    let dupRegex = /\b(\w+)\s+\1\b/g;
+    document.write("Text: " + dupText + "<br>");
+    document.write("Duplicates: " + dupText.match(dupRegex) + "<br>");
+  </script> -->
+
+<!-- <script>
+    let tweet = prompt("Enter:");
+    let hashtags = tweet.match(/#[A-Za-z0-9_]+/g);
+    document.write("Tweet: " + tweet + "<br>");
+    document.write("Hashtags: " + hashtags + "<br>");
+</script> -->
