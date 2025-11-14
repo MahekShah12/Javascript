@@ -1,0 +1,149 @@
+<script>
+function getThickerBook(pages1,pages2){
+    if(pages1 > pages2){
+        return pages1;
+    } 
+    else{
+        return pages2;
+    }
+}
+const bookFactorial=function(n){
+    if(n < 0){
+        return "Error: The number should be positive";
+    }
+    else if(n == 1){
+        return 1;
+    }
+    else{
+        return  n * bookFactorial(n - 1);
+    }
+};
+const checkLibraryNote =(note)=> note.toLowerCase().includes("library");
+function secretShelf(password){
+    const secret = "rare book note";
+    return function (pass){
+        if (pass === password){
+            return secret;
+        } 
+        else{
+            return "Access Denied";
+        }
+    };
+}
+let libraryName="City Smart Library";
+function scope(){
+    let bookCount=5000;
+    if (true){
+        let tempBorrowedBooks=50;
+        console.log("Inside block:",tempBorrowedBooks);
+    }
+    console.log("Inside function:",bookCount);
+}
+console.log("Global:",libraryName);
+scope();
+function reverseISBN(isbn){
+    try{
+        if (typeof isbn !== "number" || isNaN(isbn)){
+            throw new Error("Invalid ISBN number");
+        }
+        let str=Math.abs(isbn).toString().split("").reverse().join("");
+        let reversed=parseInt(str);   
+        if(isbn < 0){
+            reversed= -reversed;           
+        }
+        return reversed;
+    }
+    catch(err){
+        return "Error: " +err.message;
+    }
+}
+function isPalindrome(num){
+    const reversed=parseInt(num.toString().split("").reverse().join(""));
+    return num===reversed;
+}
+function isTitlePalindrome(title){
+    let formatted=title.toLowerCase().replace(/\s+/g, "");
+    let reversed=formatted.split("").reverse().join("");
+    return formatted===reversed;
+}
+function sqrtPages(pages){
+    try{
+        if(typeof pages !== "number" || isNaN(pages)){
+            throw new Error("Invalid input");
+        }
+        if(pages < 0){
+            throw new Error("Error: Negative numbers not allowed");
+        }
+        return Math.sqrt(pages);
+    }
+    catch(err){
+        return "Error: " + err.message;
+    }
+}
+const isPrimeShelf=(num) =>{
+    try{
+        if(typeof num !== "number" || num < 2){
+            throw new Error("Invalid shelf number");
+        }
+        for(let i = 2; i <= Math.sqrt(num); i++){
+            if (num%i === 0) 
+            return false;
+        }
+        return true;
+    }
+    catch(err){
+        return "Error: " + err.message;
+    }
+};
+function libraryMenu(){
+    console.log("\nSmart Library Management System:");
+    console.log("1. Compare two books pages");
+    console.log("2. Generate factorial-based ticket ID");
+    console.log("3. Check if note contains the word 'Library'");
+    console.log("4. Access Rare Book Note ");
+    console.log("5. Reverse ISBN number and check if it’s a Palindrome");
+    console.log("6. Check if Title is a Palindrome");
+    console.log("7. Square root of total pages read");
+    console.log("8. Check if Shelf number is prime");
+    console.log("9. Exit");
+    console.log("---------------------------------------");
+    const choice = parseInt(prompt("Enter your choice: "));
+    switch(choice){
+        case 1:
+            console.log("Thicker book has:",getThickerBook(120,350),"pages");
+            break;
+        case 2:
+            console.log("Ticket ID:",bookFactorial(5));
+            break;
+        case 3:
+            console.log("Contains 'Library'?",checkLibraryNote("This Library id good"));
+            break;
+        case 4:
+            const shelf=secretShelf("abcd");
+            console.log(shelf("xyz"));
+            console.log(shelf("abcd"));
+            break;
+        case 5:
+            let reversedIsbn=reverseISBN(-9876);
+            console.log("Reversed ISBN:",reversedIsbn);
+            console.log("Is Palindrome?",isPalindrome(1221));
+            break;
+        case 6:
+            console.log("Is Palindrome Title?",isTitlePalindrome("level"));
+            break;
+        case 7:
+            console.log("Square Root:",sqrtPages(-400));
+            break;
+        case 8:
+            console.log("Is Prime Shelf?",isPrimeShelf(13));
+            break;
+        case 9:
+            console.log("Exiting Library System");
+            return;
+        default:
+            console.log("Invalid choice. Try again.");
+    }
+    libraryMenu();
+    }
+libraryMenu();
+</script>

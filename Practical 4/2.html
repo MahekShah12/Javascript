@@ -1,0 +1,15 @@
+<body>
+    <script>
+        const fact = n => {
+            if(n<=1){
+                return 1;
+            }
+            else{
+                return n * fact(n - 1);
+            }
+        };
+        let num = parseInt(prompt("Enter number:"));
+        let result = fact(num);
+        document.write(`Factorial of  ${num} is ${result}`);
+    </script>
+</body>

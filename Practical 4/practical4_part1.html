@@ -1,0 +1,28 @@
+<!-- <body>
+    <input type="text" id="input">
+    <button onclick="show()">Display</button>
+    <p id="display"></p>
+    <script>
+        function show() {
+            let input=document.getElementById("input").value;
+            document.getElementById("display").textContent = input;
+        }
+    </script>
+</body> -->
+
+
+<body>
+    <script>
+        const fact = n => {
+            if(n<=1){
+                return 1;
+            }
+            else{
+                return n * fact(n - 1);
+            }
+        };
+        let num = parseInt(prompt("Enter number:"));
+        let result = fact(num);
+        document.write(`Factorial of  ${num} is ${result}`);
+    </script>
+</body>
