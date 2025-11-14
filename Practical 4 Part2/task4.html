@@ -1,0 +1,19 @@
+<script>
+    const isPrime = (num) => {
+    try {
+        if (typeof num !== "number" || !Number.isInteger(num)) {
+            throw "Input must be an integer!";
+        }
+        if (num < 2) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) return false;
+        }
+        return true;
+    } catch (err) {
+        return `Error: ${err}`;
+    }
+};
+console.log(isPrime(6));
+console.log(isPrime(13));
+console.log(isPrime("test"));
+</script>

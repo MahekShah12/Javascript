@@ -1,0 +1,15 @@
+<script>
+    function reverseNumber(num) {
+    if (typeof num !== "number" || isNaN(num)) {
+        throw new Error("Invalid number input");
+    }
+    let isNegative = num < 0;
+    let reversed = parseInt(Math.abs(num).toString().split("").reverse().join(""));
+    return isNegative ? -reversed : reversed;
+}
+function isPalindrome(num) {
+    return num === reverseNumber(num);
+}
+console.log(reverseNumber(123));  
+console.log(reverseNumber(-123));
+</script>

@@ -1,0 +1,20 @@
+<script>
+function isStringPalindrome(str) {
+    if (typeof str !== "string") {
+        throw new Error("Input must be a string");
+    }
+    let cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+    return cleaned === cleaned.split("").reverse().join("");
+}
+let userInput = prompt("Enter a word or phrase:");
+try {
+    if (isStringPalindrome(userInput)) {
+        console.log(`"${userInput}" is a palindrome`);
+    } else {
+        console.log(`"${userInput}" is NOT a palindrome`);
+    }
+} 
+catch (err) {
+    console.log("Error:", err.message);
+}
+</script>

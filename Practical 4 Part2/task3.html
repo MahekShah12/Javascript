@@ -1,0 +1,16 @@
+<script>
+function safeSquareRoot(input) {
+    try {
+        let num = Number(input);
+        if (isNaN(num)) throw "Not a number!";
+        if (num < 0) throw "Square root of negative number not allowed!";
+        return Math.sqrt(num);
+    } catch (err) {
+        return `Error: ${err}`;
+    }
+}
+
+console.log(safeSquareRoot(25));
+console.log(safeSquareRoot(-4));
+console.log(safeSquareRoot("abc"));
+</script>
