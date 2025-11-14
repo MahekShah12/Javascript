@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gender and Hobbies</title>
+  </head>
+  <body>
+    <h3>Select Gender:</h3>
+    <input type="radio" name="gender" value="Male" /> Male<br />
+    <input type="radio" name="gender" value="Female" /> Female<br /><br />
+    <h3>Select Hobbies:</h3>
+    <input type="checkbox" name="hobby" value="Dancing" /> Dancing<br />
+    <input type="checkbox" name="hobby" value="Traveling" /> Traveling<br />
+    <input type="checkbox" name="hobby" value="Coding" /> Coding<br /><br />
+    <button onclick="show()">Show</button>
+    <p id="result"></p>
+    <script>
+    function show() {
+        var gender = document.querySelector('input[name="gender"]:checked');
+        var g = gender ? gender.value : "None";
+        var h = "";
+        var hobbies = document.querySelectorAll('input[name="hobby"]:checked');
+        for (var i = 0; i < hobbies.length; i++) {
+        h += hobbies[i].value + " ";
+        }
+        document.getElementById("result").innerHTML =
+        "Gender: " + g + "<br>Hobbies: " + (h || "None");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<script>
+    const num = Math.floor(Math.random() * 100) + 1;
+    let guess;
+    do {
+        guess = parseInt(prompt("Guess the number between 1 and 100:"));
+        if(isNaN(guess)){
+            alert("Please enter a valid number.");
+        }else if(guess > num){
+            alert("Too high");
+        }else if(guess < num){
+            alert("Too low");
+        }else{
+            alert("You guessed the number correctly!");
+        }
+    } while (guess !== num);
+</script>
