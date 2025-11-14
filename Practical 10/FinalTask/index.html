@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Inventory Dashboard</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+    .highlight { background-color: red; } 
+</style>
+</head>
+<body>
+<h2>Product Inventory Dashboard</h2>
+<div>
+<label for="categoryFilter">Filter by Category:</label>
+<select id="categoryFilter">
+    <option value="all">All</option>
+</select>
+<label for="searchBox">Search by Name:</label>
+<input type="text" id="searchBox" placeholder="Enter product name...">
+</div>
+<h3>Data using Fetch()</h3>
+<table id="fetchTable" border="1" cellpadding="5"></table>
+<h3>Data using $.getJSON()</h3>
+<table id="jqueryTable" border="1" cellpadding="5"></table>
+<script>
+let products = [];
+fetch('products.json')
+    .then(response => response.json())
+    .then(data => {
+    products = data;
+    populateCategoryDropdown(data);
+    renderBothTables(data);
+    console.log("Fetch API: Displayed items =", data.length);
+})
+.catch(err => console.error('Fetch Error:', err));
+$.getJSON('products.json', function(data) {
+    renderTable(data, 'jqueryTable');
+    console.log("jQuery AJAX: Displayed items =", data.length);
+});
+function renderTable(data, tableId) {
+    const table = document.getElementById(tableId);
+    table.innerHTML = `
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price (₹)</th>
+        <th>Stock</th>
+    </tr>
+`;
+let count = 0;
+data.forEach(item => {
+    const row = document.createElement('tr');
+    if (item.stock < 5) row.classList.add('highlight');
+    row.innerHTML = `
+        <td>${item.id}</td>
+        <td>${item.name}</td>
+        <td>${item.category}</td>
+        <td>${item.price}</td>
+        <td>${item.stock}</td>
+    `;
+    table.appendChild(row);
+    count++;
+});
+console.log(`${tableId}: Displayed ${count} items`);
+}
+function renderBothTables(data) {
+    renderTable(data, 'fetchTable');
+    renderTable(data, 'jqueryTable');
+}
+function populateCategoryDropdown(data) {
+    const categories = [...new Set(data.map(p => p.category))];
+    const dropdown = document.getElementById('categoryFilter');
+    categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat;
+    option.textContent = cat;
+    dropdown.appendChild(option);
+});
+}
+document.getElementById('categoryFilter').addEventListener('change', filterAndSearch);
+document.getElementById('searchBox').addEventListener('input', filterAndSearch);
+function filterAndSearch() {
+    let filtered = [...products];
+    const category = document.getElementById('categoryFilter').value;
+    const search = document.getElementById('searchBox').value.toLowerCase();
+    if (category !== 'all') filtered = filtered.filter(p => p.category === category);
+    if (search) filtered = filtered.filter(p => p.name.toLowerCase().includes(search));
+    renderBothTables(filtered);
+    console.log("Filtered/Displayed items =", filtered.length);
+}
+</script>
+</body>
+</html>
